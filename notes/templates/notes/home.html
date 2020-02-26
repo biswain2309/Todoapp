@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% load staticfiles %}
+<body bgcolor="#afafaf">
+<h2>To-Do-App</h2>
+<form action="/add/" method="POST">
+  {% csrf_token %}
+  <input type="text" name="description" class="textbox" size="50"/>
+  <input class="btn btn-primary" type="submit" value="Add Note" />
+</form>
+
+<table frame="box" bgcolor="silver" align="left">
+<tr>
+<td>
+<ul style="list-style-type:none">
+{% for all_item in all_items %}
+<form action="/delete/{{ all_item.id }}/"
+      method="POST">
+  {% csrf_token %}
+  <li>
+    <a href="javascript:{document.getElementById('update').submit()}"><button class="btn btn-primary btn-sm"><img src="{% static 'delete_logo.png' %}" height="15" width="15" align="right"/></button></a>
+    {{ all_item.description }}
+    <a href="javascript:{document.getElementById('delete').submit()}"><button class="btn btn-primary btn-sm"><img src="{% static 'delete_logo.png' %}" height="15" width="15" align="right"/></button></a></li>
+</br>
+</form>
+{% endfor %}
+</ul>
+</td>
+</tr>
+</table>
+</body>
+</head>
