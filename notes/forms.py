@@ -1,8 +1,7 @@
 from django import forms
 from .models import Notes
 
-class NotesCreate(forms.Modelform):
-
+class NotesCreate(forms.ModelForm):
     class Meta:
         model = Notes
-        fields = '__all__'
+        fields = "__all__"
