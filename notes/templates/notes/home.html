@@ -19,13 +19,13 @@
       method="POST">
   {% csrf_token %}
   <li>
-    <a href="javascript:{document.getElementById('update').submit()}"><button class="btn btn-primary btn-sm"><img src="{% static 'delete_logo.png' %}" height="15" width="15" align="right"/></button></a>
-    {{ all_item.description }}
+    <a href="{{ all_item.get_absolute_url }}">{{ all_item.description }}</a>
     <a href="javascript:{document.getElementById('delete').submit()}"><button class="btn btn-primary btn-sm"><img src="{% static 'delete_logo.png' %}" height="15" width="15" align="right"/></button></a></li>
 </br>
-</form>
+
 {% endfor %}
 </ul>
+
 </td>
 </tr>
 </table>
