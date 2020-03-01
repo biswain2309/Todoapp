@@ -15,13 +15,10 @@
 <td>
 <ul style="list-style-type:none">
 {% for all_item in all_items %}
-<form action="/delete/{{ all_item.id }}/"
-      method="POST">
-  {% csrf_token %}
   <li>
     {{ all_item.description }}
     <a href="/edit/{{ all_item.id }}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
-    <a href="javascript:{document.getElementById('delete').submit()}"><button class="btn btn-primary btn-sm"><img src="{% static 'delete_logo.png' %}" height="15" width="15" align="right"/></button></a></li>
+    <a href="/delete/{{ all_item.id }}"><button class="btn btn-primary btn-sm"><img src="{% static 'delete_logo.png' %}" height="15" width="15" align="right"/></button></a></li>
 </br>
 
 {% endfor %}

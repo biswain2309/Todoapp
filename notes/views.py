@@ -2,11 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserChangeForm
 from .models import Notes
-from .forms import NotesCreate
+from .forms import NotesForm
 
 def home(request):
     all_items = Notes.objects.all()
-    print('----------> all items :', all_items)
     return render(request, 'notes/home.html',
       {'all_items':all_items})
 
@@ -22,16 +21,14 @@ def delete(request, todoapp_id):
 
 def edit(request, todoapp_id):
     sel_item = Notes.objects.get(id=todoapp_id)
+    print('---------> sel_item', sel_item)
     return render(request,'notes/update.html', {'sel_item':sel_item})
 
 def update(request, todoapp_id):
-    try:
-        sel_item = Notes.objects.get(id=todoapp_id)
-    except Notes.DoesNotExist:
-        return HttpResponseRedirect('/home/')
-    Notes_form = NotesCreate(request.POST, instance = sel_item)
+    sel_item = Notes.objects.get(id=todoapp_id)
+    print('---------> sel_item', sel_item)
+    Notes_form = NotesForm(request.POST, instance = sel_item)
     if Notes_form.is_valid():
         Notes_form.save()
-        return redirect("/home")
-        # return HttpResponseRedirect('/home/')
+        return HttpResponseRedirect('/home/')
     return render(request, 'notes/update.html', {'sel_item':sel_item})
